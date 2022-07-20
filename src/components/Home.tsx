@@ -5,10 +5,12 @@ import "./home.css";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [filterProducts, setFilterProducts] = useState([]);
   useEffect(() => {
     (async () => {
       let { data } = await axios.get("https://fakestoreapi.com/products");
       setProducts(data);
+      setFilterProducts(data);
     })();
   }, []);
 
@@ -23,24 +25,40 @@ const Home = () => {
     setCategories(Array.from(categorySet));
   }, [products]);
 
-  const handleFilterCategories = () => {};
+  const handleFilterCategories = (category: any) => {
+    let filteredProducts: any = products.filter(
+      (product: any) => product.category === category
+    );
+    setFilterProducts(filteredProducts);
+  };
+
+  console.log(filterProducts);
 
   return (
     <div className="home">
       <div className="left-side-bar">
         {categories.map((category) => {
           return (
-            <div className="category" onClick={handleFilterCategories}>
+            <div
+              className="category"
+              onClick={() => handleFilterCategories(category)}
+            >
               {category}
             </div>
           );
         })}
 
-        <button>CLear Filter</button>
+        <button
+          onClick={() => {
+            setFilterProducts(products);
+          }}
+        >
+          CLear Filter
+        </button>
       </div>
       <div className="products">
-        {products.map((product: any) => (
-          <div className="product">
+        {filterProducts.map((product: any, key: number) => (
+          <div className="product" key={key}>
             <strong>{product.title}</strong>
             <img src={product.image} alt="" />
           </div>
