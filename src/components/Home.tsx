@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./home.css";
+import { useHistory } from "react-router";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
+  const history = useHistory();
   useEffect(() => {
     (async () => {
       let { data } = await axios.get("https://fakestoreapi.com/products");
@@ -58,7 +60,13 @@ const Home = () => {
       </div>
       <div className="products">
         {filterProducts.map((product: any, key: number) => (
-          <div className="product" key={key}>
+          <div
+            className="product"
+            key={key}
+            onClick={() => {
+              history.push(`/product/${product.id}`);
+            }}
+          >
             <strong>{product.title}</strong>
             <img src={product.image} alt="" />
           </div>
