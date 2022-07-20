@@ -1,40 +1,41 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./home.css";
 import { useHistory } from "react-router";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../actions/productAction";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const history = useHistory();
+  const dispatch = useDispatch();
+  const productsData = useSelector((state: any) => state?.products);
+
   useEffect(() => {
-    (async () => {
-      let { data } = await axios.get("https://fakestoreapi.com/products");
-      setProducts(data);
-      setFilterProducts(data);
-    })();
+    dispatch(getAllProducts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
+    setProducts(productsData.products);
+    setFilterProducts(productsData.products);
     const categorySet: any = new Set();
-    products.forEach((product: any) => {
+    productsData?.products?.forEach((product: any) => {
       if (!categorySet.has(product?.category)) {
         categorySet.add(product?.category);
       }
     });
 
     setCategories(Array.from(categorySet));
-  }, [products]);
+  }, [productsData]);
 
   const handleFilterCategories = (category: any) => {
-    let filteredProducts: any = products.filter(
+    let filteredProducts: any = products?.filter(
       (product: any) => product.category === category
     );
     setFilterProducts(filteredProducts);
   };
-
-  console.log(filterProducts);
 
   return (
     <div className="home">
@@ -59,7 +60,7 @@ const Home = () => {
         </button>
       </div>
       <div className="products">
-        {filterProducts.map((product: any, key: number) => (
+        {filterProducts?.map((product: any, key: number) => (
           <div
             className="product"
             key={key}
