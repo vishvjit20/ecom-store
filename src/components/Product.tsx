@@ -63,19 +63,28 @@ const Product = () => {
       </div>
       <div className="product-right">
         <h1>{product?.title}</h1>
-        <br />
-        <br />
-        <p>Price : {product?.price}</p>
-        <p>{product?.description}</p>
         <h3>Category : {product?.category}</h3>
+        <h4>Description : </h4>
+        <p>{product?.description}</p>
         <div>
-          <p>Rating : {product?.rating?.rate}</p>
-          <p>Quantity : </p>
-          <button onClick={reduceQuantity}>-</button>
-          {quantity}
-          <button onClick={increaseQuantity}>+</button>
+          <b>Price : </b> {product?.price}
         </div>
-        <button onClick={addToCart}>Add To Cart</button>
+        <div>
+          <b>Rating : </b> {product?.rating?.rate}
+        </div>
+        <div>
+          <p>Quantity : </p>
+          <div className="add-qty">
+            <button onClick={reduceQuantity}>-</button>
+            {`  ${quantity}  `}
+            <button onClick={increaseQuantity}>+</button>
+          </div>
+        </div>
+        <div>
+          <button className="add-to-cart-btn" onClick={addToCart}>
+            Add To Cart
+          </button>
+        </div>
       </div>
     </div>
   );
