@@ -40,6 +40,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="left-side-bar">
+        <h4>Categories</h4>
         {categories.map((category) => {
           return (
             <div
@@ -52,25 +53,28 @@ const Home = () => {
         })}
 
         <button
+          className="filter"
           onClick={() => {
             setFilterProducts(products);
           }}
         >
-          CLear Filter
+          Clear Filter
         </button>
       </div>
       <div className="products">
         {filterProducts?.map((product: any, key: number) => (
-          <div
-            className="product-box"
-            key={key}
-            onClick={() => {
-              dispatch(getProduct(product));
-              history.push(`/product/${product.id}`);
-            }}
-          >
-            <strong>{product.title}</strong>
-            <img src={product.image} alt="" />
+          <div className="product-box" key={key}>
+            <div className="product-heading">{product.title}</div>
+            <div className="product-img">
+              <img
+                src={product.image}
+                alt=""
+                onClick={() => {
+                  dispatch(getProduct(product));
+                  history.push(`/product/${product.id}`);
+                }}
+              />
+            </div>
           </div>
         ))}
       </div>
