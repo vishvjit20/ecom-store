@@ -2,7 +2,7 @@ import "./home.css";
 import { useHistory } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../actions/productAction";
+import { getAllProducts, getProduct } from "../actions/productAction";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -62,9 +62,10 @@ const Home = () => {
       <div className="products">
         {filterProducts?.map((product: any, key: number) => (
           <div
-            className="product"
+            className="product-box"
             key={key}
             onClick={() => {
+              dispatch(getProduct(product));
               history.push(`/product/${product.id}`);
             }}
           >

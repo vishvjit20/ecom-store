@@ -19,7 +19,7 @@
   height: 100vh;
 }
 
-.product {
+.product-box {
   height: 200px;
   width: 300px;
   border: 1px solid black;
@@ -30,11 +30,11 @@
   align-items: center;
 }
 
-.product strong {
+.product-box strong {
   height: 10%;
 }
 
-.product img {
+.product-box img {
   height: 70%;
 }
 

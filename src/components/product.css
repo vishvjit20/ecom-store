@@ -1,0 +1,19 @@
+.product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product img {
+  width: 80%;
+}
+
+.product div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;
+  height: 100vh;
+  width: 50vw;
+}

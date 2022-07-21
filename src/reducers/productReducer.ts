@@ -2,10 +2,12 @@ import {
   GET_ALL_PRODUCTS_FAILURE,
   GET_ALL_PRODUCTS_REQUEST,
   GET_ALL_PRODUCTS_SUCCESS,
+  GET_PRODUCT,
 } from "../constants";
 
 const initialState: any = {
   products: [],
+  product: [],
   error: false,
   loading: false,
   errorMsg: "",
@@ -34,6 +36,13 @@ export const productReducer = (state = initialState, action: any) => {
         error: true,
         errorMsg: action.payload,
       };
+    case GET_PRODUCT:
+      return {
+        ...state,
+        loading: false,
+        product: action.payload,
+      };
+
     default:
       return state;
   }
