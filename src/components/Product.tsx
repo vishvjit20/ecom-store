@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import "./product.css";
 
 const Product = () => {
   const product = useSelector((state: any) => state?.products?.product);
   const [quantity, setQuantity] = useState<number>(1);
   const MAX_QUANTITY = 50;
+  const history = useHistory();
   const increaseQuantity = () => {
     if (quantity < MAX_QUANTITY) setQuantity(quantity + 1);
   };
@@ -35,6 +37,9 @@ const Product = () => {
         "cart",
         JSON.stringify([...remainingCartItems, cartObj])
       );
+      setTimeout(() => {
+        history.push("/product/add-to-cart");
+      }, 1000);
     } else {
       const newQuantity = quantity ? quantity : 1;
       let cartObj = {
