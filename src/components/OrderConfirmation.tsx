@@ -5,7 +5,10 @@ const OrderConfirmation = (props: any) => {
   const orderData = JSON.parse(localStorage.getItem("cart")!)?.filter(
     (data: any) => data?.id === Number(orderID)
   );
-  console.log(orderData);
+  const filteredCartItems = JSON.parse(localStorage.getItem("cart")!)?.filter(
+    (data: any) => data?.id !== Number(orderID)
+  );
+  localStorage.setItem("cart", JSON.stringify([...filteredCartItems]));
   return (
     <div>
       <h2>Order Confirmed!</h2>

@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, getProduct } from "../actions/productAction";
+import Navigation from "../pages/Navigation";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -38,47 +39,50 @@ const Home = () => {
   };
 
   return (
-    <div className="home">
-      <div className="left-side-bar">
-        <h4>Categories</h4>
-        {categories.map((category) => {
-          return (
-            <div
-              className="category"
-              onClick={() => handleFilterCategories(category)}
-            >
-              {category}
-            </div>
-          );
-        })}
+    <>
+      <Navigation />
+      <div className="home">
+        <div className="left-side-bar">
+          <h4>Categories</h4>
+          {categories.map((category) => {
+            return (
+              <div
+                className="category"
+                onClick={() => handleFilterCategories(category)}
+              >
+                {category}
+              </div>
+            );
+          })}
 
-        <button
-          className="filter"
-          onClick={() => {
-            setFilterProducts(products);
-          }}
-        >
-          Clear Filter
-        </button>
-      </div>
-      <div className="products">
-        {filterProducts?.map((product: any, key: number) => (
-          <div className="product-box" key={key}>
-            <div className="product-heading">{product.title}</div>
-            <div className="product-img">
-              <img
-                src={product.image}
-                alt=""
-                onClick={() => {
-                  dispatch(getProduct(product));
-                  history.push(`/product/${product.id}`);
-                }}
-              />
+          <button
+            className="filter"
+            onClick={() => {
+              setFilterProducts(products);
+            }}
+          >
+            Clear Filter
+          </button>
+        </div>
+        <div className="products">
+          {filterProducts?.map((product: any, key: number) => (
+            <div className="product-box" key={key}>
+              <div className="product-heading">{product.title}</div>
+              <div className="product-img">
+                <img
+                  src={product.image}
+                  alt=""
+                  onClick={() => {
+                    dispatch(getProduct(product));
+                    history.push(`/product/${product.id}`);
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

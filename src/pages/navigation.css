@@ -1,23 +1,4 @@
-.cart {
-  width: 80vw;
-  margin: 20px auto;
-}
-
-.item {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-}
-
-.item p {
-  text-transform: capitalize;
-}
-
-.item img {
-  height: 50px;
-}
-
-.item a {
+div a {
   padding: 0 10px;
   height: 40px;
   background-color: #354259;
@@ -29,4 +10,5 @@
   line-height: 40px;
   text-decoration: none;
   margin-right: 20px;
+  border-radius: 5px;
 }

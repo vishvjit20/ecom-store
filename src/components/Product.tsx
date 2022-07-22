@@ -54,6 +54,9 @@ const Product = () => {
         "cart",
         JSON.stringify([...remainingCartItems, cartObj])
       );
+      setTimeout(() => {
+        history.push("/product/add-to-cart");
+      }, 1000);
     }
   };
   return (
